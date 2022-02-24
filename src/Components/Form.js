@@ -15,16 +15,9 @@ export default function Form(props) {
     };
 
     return (
-        <form>
-            <div className='errors'>
-                <div>{errors.name}</div>
-                <div>{errors.email}</div>
-                <div>{errors.password}</div>
-                <div>{errors.terms}</div>
-            </div>
+        <form onSubmit={onSubmit}>
             Building stuff
             <label>
-
                 Please Enter a Name
                 <input
                     value={values.name}
@@ -33,9 +26,9 @@ export default function Form(props) {
                     type='text'
                     placeholder='Hector Barbossa'
                 />
+                <div>{errors.name}</div>
             </label>
             <label>
-
                 Please Enter an email address
                 <input
                     name='email'
@@ -44,17 +37,17 @@ export default function Form(props) {
                     placeholder='Yar1863@highseas.com'
                     onChange={onChange}
                 />
+                <div>{errors.email}</div>
             </label>
             <label>
-
                 Create a password
                 <input
                     name='password'
                     type='password'
                     value={values.password}
-                    placeholder='Must be at least 4 characters long'
                     onChange={onChange}
                 />
+                <div>{errors.password}</div>
             </label>
             <label id='radio'>
                 I accept the Terms of Use
@@ -62,7 +55,7 @@ export default function Form(props) {
                     id='choice'
                     name='tos'
                     type='radio'
-                    value='accept'
+                    value='I accept the Terms of Use'
                     onChange={onChange}
                     checked={values.tos === 'I accept the Terms of Use'}
                 />
@@ -73,11 +66,12 @@ export default function Form(props) {
                     id='choice'
                     name='tos'
                     type='radio'
-                    value='decline'
+                    value='I am disinclined to acquiesce'
                     onChange={onChange}
                     checked={values.tos === 'I am disinclined to acquiesce'}
                 />
             </label>
+            <div>{errors.tos}</div>
             <button>Submit</button>
         </form>
     );

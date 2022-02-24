@@ -29,20 +29,19 @@ function App() {
     const getUsers = () => {
         axios
             .get(`https://reqres.in/api/users`)
-            .then((res) => {
-                console.log('first run' + res.data);
-                setUsers(res.data);
-                console.log(setUsers(res.data))
+            .then(res => {
+                console.log('first run' + JSON.stringify(res));
+                setUsers(JSON.stringify(res.data));
             })
-            .catch((err) => console.error(err));
+            .catch((err) => console.error(err))
     };
 
-    const postNewUser = (newUser) => {
+    const postNewUser = newUser => {
         axios
             .post(`https://reqres.in/api/users`, newUser)
-            .then((res) => {
-                console.log(res.data + 'running');
-                setUsers([...users, res.data]);
+            .then(res => {
+                console.log(JSON.stringify(res) + 'running');
+                setUsers([...users, JSON.stringify(res.data)]);
                 setFormValues(initialFormValues);
             })
             .catch((err) => console.error(err));
@@ -68,7 +67,7 @@ function App() {
             name: formValues.name.trim(),
             email: formValues.email.trim(),
             password: formValues.password.trim(),
-            tos: formValues.name,
+            tos: formValues.tos,
         };
 
         postNewUser(newUser);
@@ -76,7 +75,7 @@ function App() {
 
     useEffect(() => {
         getUsers();
-    }, []);
+    }, [setUsers]);
 
     return (
         <div className='App'>
